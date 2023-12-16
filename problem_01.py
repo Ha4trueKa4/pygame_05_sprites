@@ -26,7 +26,9 @@ def main():
 
     # группа, содержащая все спрайты
     all_sprites = pygame.sprite.Group()
-
+    arrow = pygame.sprite.Sprite(all_sprites)
+    arrow.image = load_image('arrow.png')
+    arrow.rect = arrow.image.get_rect()
     # создайте спрайт с картинкой arrow.png
     # и добавьте его в группу all_sprites
 
@@ -39,11 +41,12 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEMOTION:
-                # изменяем положение спрайта-стрелки
-                raise NotImplementedError()
+                arrow.rect.x = event.pos[0]
+                arrow.rect.y = event.pos[1]
 
         screen.fill(pygame.Color("black"))
-
+        if pygame.mouse.get_focused():
+            all_sprites.draw(screen)
         # рисуем курсор только если он в пределах окна
 
         pygame.display.flip()

@@ -27,7 +27,9 @@ def main():
 
     # группа, содержащая все спрайты
     all_sprites = pygame.sprite.Group()
-
+    creature = pygame.sprite.Sprite(all_sprites)
+    creature.image = load_image('creature.png')
+    creature.rect = creature.image.get_rect()
     # создайте спрайт с картинкой creature.png
     # и добавьте его в группу all_sprites
 
@@ -43,8 +45,13 @@ def main():
             # Проверяем нажатые кнопки
             key = pygame.key.get_pressed()
             if key[pygame.K_DOWN]:
-                # Обрабатываем нажатие K_DOWN
-                raise NotImplementedError()
+                creature.rect.y += dist
+            elif key[pygame.K_UP]:
+                creature.rect.y -= dist
+            elif key[pygame.K_LEFT]:
+                creature.rect.x -= dist
+            elif key[pygame.K_RIGHT]:
+                creature.rect.x += dist
 
         screen.fill(pygame.Color("white"))
         all_sprites.draw(screen)
